@@ -1,0 +1,90 @@
+<organisation language="en" dateGeneration="2026-03-21T10:00:00.000Z" code="1.0" libelle="Aeronautical Organizational Structure" Description="View generated from CSV organigramme" createur="ENAC">
+    <departements>
+        <departement id="chief-executive-officer" parent="" nom="CHIEF EXECUTIVE OFFICER"/>
+        <departement id="commercial" parent="chief-executive-officer" nom="Commercial"/>
+        <departement id="engineering" parent="chief-executive-officer" nom="Engineering"/>
+        <departement id="finance" parent="chief-executive-officer" nom="Finance"/>
+        <departement id="human-resources" parent="chief-executive-officer" nom="Human Resources"/>
+        <departement id="operations-procurement" parent="chief-executive-officer" nom="Operations &amp; Procurement"/>
+        <departement id="programmes" parent="chief-executive-officer" nom="Programmes"/>
+        <departement id="quality" parent="chief-executive-officer" nom="Quality"/>
+        <departement id="customer-support-services" parent="chief-executive-officer" nom="Customer Support &amp; Services"/>
+        <departement id="corporate-secretary-general-counsel" parent="chief-executive-officer" nom="Corporate Secretary &amp; General Counsel"/>
+        <departement id="ciso-future-developments" parent="chief-executive-officer" nom="CISO &amp; Future Developments"/>
+        <departement id="communications-corporate-branding" parent="chief-executive-officer" nom="Communications &amp; Corporate Branding"/>
+        <departement id="enterprise-risk-management-audit" parent="chief-executive-officer" nom="Enterprise Risk Management &amp; Audit"/>
+        <departement id="flight-sales" parent="commercial" nom="Flight Sales"/>
+        <departement id="colo-future-developments" parent="commercial" nom="Colo &amp; Future Developments"/>
+        <departement id="business-development" parent="commercial" nom="Business Development"/>
+        <departement id="marketing" parent="commercial" nom="Marketing"/>
+        <departement id="sales-europe-north-america" parent="commercial" nom="Sales Europe &amp; North America"/>
+        <departement id="sales-latin-america-middle-east-africa" parent="commercial" nom="Sales Latin America Middle East Africa"/>
+        <departement id="sales-asia-pacific" parent="commercial" nom="Sales Asia Pacific"/>
+        <departement id="sales-japan" parent="commercial" nom="Sales Japan"/>
+        <departement id="sales-china" parent="commercial" nom="Sales China"/>
+        <departement id="aircraft-contracts-administration" parent="commercial" nom="Aircraft Contracts &amp; Administration"/>
+        <departement id="customer-planning-delivery-shift-management" parent="commercial" nom="Customer Planning &amp; Delivery Shift Management"/>
+        <departement id="airworthiness" parent="engineering" nom="Airworthiness"/>
+        <departement id="aircraft-operability-data" parent="engineering" nom="Aircraft Operability &amp; Data"/>
+        <departement id="customisation-system-installation" parent="engineering" nom="Customisation &amp; System Installation"/>
+        <departement id="flight-physics" parent="engineering" nom="Flight Physics"/>
+        <departement id="engineering-integration-programming-chief-engineering" parent="engineering" nom="Engineering Integration &amp; Programming Chief Engineering"/>
+        <departement id="engineering-performance" parent="engineering" nom="Engineering Performance"/>
+        <departement id="flight-test" parent="engineering" nom="Flight Test"/>
+        <departement id="structures-engineering" parent="engineering" nom="Structures Engineering"/>
+        <departement id="systems-propulsion-engineering" parent="engineering" nom="Systems &amp; Propulsion Engineering"/>
+        <departement id="svp-finance-cfo" parent="finance" nom="SVP Finance &amp; CFO"/>
+        <departement id="accounting-treasury-tax" parent="finance" nom="Accounting Treasury &amp; Tax"/>
+        <departement id="financial-controlling" parent="finance" nom="Financial Controlling"/>
+        <departement id="customer-finance-credit-management" parent="finance" nom="Customer Finance &amp; Credit Management"/>
+        <departement id="hr-performance" parent="human-resources" nom="HR Performance"/>
+        <departement id="hr-business-partners" parent="human-resources" nom="HR Business Partners"/>
+        <departement id="labour-relations-social-policies-labour-law" parent="human-resources" nom="Labour Relations Social Policies &amp; Labour Law"/>
+        <departement id="people-resourcing-hr-development-digital" parent="human-resources" nom="People Resourcing HR Development &amp; Digital"/>
+        <departement id="health-safety" parent="human-resources" nom="Health &amp; Safety"/>
+        <departement id="fal-operations" parent="operations-procurement" nom="FAL Operations"/>
+        <departement id="fal-industrialisation" parent="operations-procurement" nom="FAL Industrialisation"/>
+        <departement id="direct-indirect-procurement-supply-chain" parent="operations-procurement" nom="Direct/Indirect Procurement &amp; Supply Chain"/>
+        <departement id="aerostructures-procurement-supply-chain" parent="operations-procurement" nom="Aerostructures Procurement &amp; Supply Chain"/>
+        <departement id="transverse-operational-excellence-logistics" parent="operations-procurement" nom="Transverse Operational Excellence &amp; Logistics"/>
+        <departement id="cnq-program-manager" parent="programmes" nom="CnQ Program Manager"/>
+        <departement id="plm-manager" parent="programmes" nom="PLM Manager"/>
+        <departement id="programme-management-coc" parent="programmes" nom="Programme Management CoC"/>
+        <departement id="in-service-continuous-improvements" parent="programmes" nom="In-service Continuous Improvements"/>
+        <departement id="configurations-integration" parent="programmes" nom="Configurations Integration"/>
+        <departement id="integrated-planning" parent="programmes" nom="Integrated Planning"/>
+        <departement id="performance-improvement" parent="programmes" nom="Performance Improvement"/>
+        <departement id="customer-line" parent="programmes" nom="Customer Line"/>
+        <departement id="risks-ops" parent="quality" nom="Risks &amp; Ops"/>
+        <departement id="quality-programme" parent="quality" nom="Quality Programme"/>
+        <departement id="supplier-quality" parent="quality" nom="Supplier Quality"/>
+        <departement id="quality-partner" parent="quality" nom="Quality Partner"/>
+        <departement id="quality-fals" parent="quality" nom="Quality FALs"/>
+        <departement id="quality-flightline" parent="quality" nom="Quality Flightline"/>
+        <departement id="doa-independant-monitoring-q-engineering" parent="quality" nom="DOA Independant Monitoring &amp; Q Engineering"/>
+        <departement id="quality-customer-service" parent="quality" nom="Quality Customer Service"/>
+        <departement id="erm-officer-delegate" parent="enterprise-risk-management-audit" nom="ERM Officer Delegate"/>
+        <departement id="corporate-audit-officer-delegate" parent="enterprise-risk-management-audit" nom="Corporate Audit Officer Delegate"/>
+        <departement id="customer-support" parent="customer-support-services" nom="Customer Support"/>
+        <departement id="customer-training-flight-operations" parent="customer-support-services" nom="Customer Training &amp; Flight Operations"/>
+        <departement id="customer-services" parent="customer-support-services" nom="Customer Services"/>
+        <departement id="services-sales-contract" parent="customer-support-services" nom="Services Sales &amp; Contract"/>
+        <departement id="csd-fsr" parent="customer-support-services" nom="CSD &amp; FSR"/>
+        <departement id="accidents-incident-investigations" parent="customer-support-services" nom="Accidents/Incident Investigations"/>
+        <departement id="regional-safety-plan" parent="customer-support-services" nom="Regional Safety Plan"/>
+        <departement id="safety-management-system" parent="customer-support-services" nom="Safety Management System"/>
+        <departement id="digital" parent="corporate-secretary-general-counsel" nom="Digital"/>
+        <departement id="legal-corporate-governance-insurance" parent="corporate-secretary-general-counsel" nom="Legal Corporate Governance &amp; Insurance"/>
+        <departement id="facility-management-sites-security" parent="corporate-secretary-general-counsel" nom="Facility Management &amp; Sites Security"/>
+        <departement id="compliance-export-control" parent="corporate-secretary-general-counsel" nom="Compliance &amp; Export Control"/>
+        <departement id="exp-csr-environment-manager" parent="ciso-future-developments" nom="Exp - CSR &amp; Environment Manager"/>
+        <departement id="exp-institutional-relations-manager" parent="ciso-future-developments" nom="Exp - Institutional Relations Manager"/>
+        <departement id="exp-public-affairs-partnership-ecosystem" parent="ciso-future-developments" nom="Exp - Public Affairs Partnership &amp; Ecosystem"/>
+        <departement id="spec-information-security-business-continuity-officer" parent="ciso-future-developments" nom="Spec - Information Security &amp; Business Continuity Officer"/>
+        <departement id="spec-environment-officer" parent="ciso-future-developments" nom="Spec - Environment Officer"/>
+        <departement id="branding" parent="communications-corporate-branding" nom="Branding"/>
+        <departement id="corporate-social-responsibility-communication" parent="communications-corporate-branding" nom="Corporate Social Responsibility Communication"/>
+        <departement id="media" parent="communications-corporate-branding" nom="Media"/>
+        <departement id="promotion" parent="communications-corporate-branding" nom="Promotion"/>
+    </departements>
+</organisation>

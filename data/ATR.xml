@@ -1,0 +1,53 @@
+<organisation language="en" dateGeneration="2026-03-17T17:07:47.239Z" code="1.0" libelle="Aeronautical Organizational Structure" Description="View generated on 2026-03-17" createur="ENAC">
+    <tasks>
+        <task id="task-1773734480605" nom="New Task" order="1"/>
+    </tasks>
+    <departements>
+        <departement id="dept-0" parent="" nom="CEO" type="operational">
+            <description><![CDATA[New department]]></description>
+        </departement>
+        <departement id="1" parent="dept-0" nom="Production" type="operational"/>
+        <departement id="2" parent="1" nom="FAL" type="operational"/>
+        <departement id="4" parent="dept-0" nom="Sales and Marketing" type="operational"/>
+        <departement id="6" parent="4" nom="Sales" type="operational"/>
+        <departement id="7" parent="4" nom="Marketing" type="operational"/>
+        <departement id="8" parent="dept-0" nom="Engineering" type="operational"/>
+        <departement id="9" parent="8" nom="Future Projects" type="operational"/>
+        <departement id="10" parent="8" nom="Retrofit" type="operational"/>
+        <departement id="11" parent="8" nom="Engines" type="operational"/>
+        <departement id="12" parent="8" nom="Cabin" type="operational"/>
+        <departement id="13" parent="8" nom="Structure" type="operational"/>
+        <departement id="15" parent="8" nom="Airworthiness" type="operational"/>
+        <departement id="16" parent="15" nom="Continued A/W" type="operational"/>
+        <departement id="17" parent="15" nom="Certification" type="operational"/>
+        <departement id="18" parent="15" nom="Process" type="operational"/>
+        <departement id="19" parent="8" nom="Flight Tests" type="operational"/>
+        <departement id="20" parent="8" nom="Documentation" type="operational"/>
+        <departement id="21" parent="8" nom="Flight physics" type="operational"/>
+        <departement id="22" parent="dept-0" nom="Programs &amp; application" type="operational"/>
+        <departement id="23" parent="22" nom="Certification" type="operational"/>
+        <departement id="24" parent="22" nom="Chief Engineering" type="operational"/>
+        <departement id="25" parent="22" nom="Fleet monitoring" type="operational"/>
+        <departement id="26" parent="dept-0" nom="HR" type="operational"/>
+        <departement id="27" parent="26" nom="Ethics and compliance" type="operational"/>
+        <departement id="28" parent="dept-0" nom="Corporate Social Responsibility" type="operational" abbreviation="CSE"/>
+        <departement id="29" parent="dept-0" nom="Support" type="operational"/>
+        <departement id="30" parent="29" nom="Training" type="operational"/>
+        <departement id="aa" parent="dept-0" nom="Legal" type="direction" abbreviation="LGL"/>
+        <departement id="fin-0" parent="dept-0" nom="Finances" type="direction" abbreviation="FIN"/>
+        <departement id="safety-0" parent="dept-0" nom="Safety" type="direction"/>
+        <departement id="proc" parent="dept-0" nom="Procurements" type="commercial"/>
+        <departement id="mass-and-balance" parent="21" nom="Mass &amp; Balance" type="technical"/>
+        <departement id="mass-and-balance-copy" parent="21" nom="Low Speed Performance" type="technical"/>
+        <departement id="mass-and-balance-copy-1" parent="21" nom="Outils" type="technical">
+            <dep_tasks>
+                <dep_task id="task-1773734480605" nom="New Task" categorie="" order="1"/>
+            </dep_tasks>
+        </departement>
+        <departement id="it" parent="dept-0" nom="IT " type="operational"/>
+        <departement id="30-copy" parent="29" nom="Customer Support Director," type="operational"/>
+        <departement id="30-copy-1" parent="29" nom="A/C Delivery" type="operational"/>
+        <departement id="30-copy-2" parent="29" nom="Support Flight Ops" type="operational"/>
+        <departement id="aog-man" parent="29" nom="AOG Management" type="operational"/>
+    </departements>
+</organisation>

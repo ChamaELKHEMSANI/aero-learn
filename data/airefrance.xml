@@ -1,0 +1,378 @@
+<?xml version="1.0" ?>
+<organisation language="en" dateGeneration="2026-03-08T12:00:00.000000" code="1.0" libelle="Air France - Aeronautical Organizational Structure" Description="Air France organizational structure with departments, positions, and tasks - EASA PART-145 compliant" createur="Air France - Maintenance">
+    <departements>
+  <!-- ===== ROOT DEPARTMENT: ACCOUNTABLE MANAGER ===== -->
+  <departement id="dir-gen" nom="General Management" parent="" type="strategic">
+    <description>Air France General Management - Executive direction and strategic oversight</description>
+    <responsable>Anne Rigail (CEO)</responsable>
+    <note>General Management Division responsible for overall company strategy and major decisions</note>
+    <sous_departements>
+      <sous_departement nom="engineering-maintenance"/>
+      <sous_departement nom="aircraft-maintenance"/>
+      <sous_departement nom="flight-operations"/>
+      <sous_departement nom="finance-economy"/>
+      <sous_departement nom="operations-cargo"/>
+    </sous_departements>
+  </departement>
+
+  <!-- ===== ENGINEERING &amp; MAINTENANCE ===== -->
+  <departement id="engineering-maintenance" nom="Engineering &amp; Maintenance Management" parent="dir-gen" type="technical">
+    <description>Direction of Engineering and Maintenance - Responsible for aircraft airworthiness and technical engineering</description>
+    <responsable>Géry Mortreux</responsable>
+    <note>Manages airworthiness directives, technical modifications, and maintenance planning compliance with EASA PART-145</note>
+    <sous_departements>
+      <sous_departement nom="engineering-support"/>
+      <sous_departement nom="maintenance-planning"/>
+    </sous_departements>
+  </departement>
+
+  <!-- ===== ENGINEERING &amp; SUPPORT ===== -->
+  <departement id="engineering-support" nom="Engineering &amp; Technical Support" parent="engineering-maintenance" type="technical">
+    <description>Engineering and Technical Support - Provides airworthiness and systems engineering expertise</description>
+    <responsable>To be assigned</responsable>
+    <note>Handles airworthiness directives (AD), technical modifications (MOD), systems diagnostics, and engineering documentation</note>
+    <dep_postes>
+      <dep_poste id="1001">
+        <postetask id="2001"/>
+        <postetask id="2002"/>
+        <postetask id="2003"/>
+        <postedoc id="5001" page_reference="EASA PART-145 Section A.20"/>
+      </dep_poste>
+      <dep_poste id="1002">
+        <postetask id="2004"/>
+        <postetask id="2005"/>
+        <postedoc id="5003" page_reference="AMM Chapter 3"/>
+      </dep_poste>
+    </dep_postes>
+    <dep_tasks>
+      <dep_task id="2001">
+        <taskposte id="1001"/>
+        <taskdoc id="5001"/>
+        <taskdoc id="5009"/>
+      </dep_task>
+      <dep_task id="2002">
+        <taskposte id="1001"/>
+        <taskdoc id="5001"/>
+      </dep_task>
+      <dep_task id="2003">
+        <taskposte id="1001"/>
+        <taskdoc id="5008"/>
+      </dep_task>
+      <dep_task id="2004">
+        <taskposte id="1002"/>
+        <taskdoc id="5003"/>
+        <taskdoc id="5004"/>
+      </dep_task>
+      <dep_task id="2005">
+        <taskposte id="1002"/>
+        <taskdoc id="5003"/>
+      </dep_task>
+    </dep_tasks>
+    <dep_documents>
+      <dep_document id="5001">
+        <doctask id="2001"/>
+        <doctask id="2002"/>
+      </dep_document>
+      <dep_document id="5003">
+        <doctask id="2004"/>
+      </dep_document>
+      <dep_document id="5004">
+        <doctask id="2004"/>
+      </dep_document>
+    </dep_documents>
+  </departement>
+
+  <!-- ===== MAINTENANCE PLANNING ===== -->
+  <departement id="maintenance-planning" nom="Maintenance Planning &amp; Logistics" parent="engineering-maintenance" type="technical">
+    <description>Maintenance Planning and Logistics - Coordinates heavy maintenance checks and scheduling</description>
+    <responsable>To be assigned</responsable>
+    <note>Responsible for A-Check, C-Check planning and coordination with flight operations to maximize aircraft availability</note>
+    <dep_postes>
+      <dep_poste id="1003">
+        <postetask id="2013"/>
+        <postetask id="2014"/>
+      </dep_poste>
+    </dep_postes>
+    <dep_tasks>
+      <dep_task id="2013">
+        <taskposte id="1003"/>
+        <taskdoc id="5008"/>
+      </dep_task>
+      <dep_task id="2014">
+        <taskposte id="1003"/>
+        <taskdoc id="5001"/>
+      </dep_task>
+    </dep_tasks>
+    <dep_documents>
+      <dep_document id="5008">
+        <doctask id="2013"/>
+      </dep_document>
+    </dep_documents>
+  </departement>
+
+  <!-- ===== AIRCRAFT MAINTENANCE ===== -->
+  <departement id="aircraft-maintenance" nom="Aircraft Maintenance Management" parent="dir-gen" type="technical">
+    <description>Direction of Aircraft Maintenance - Manages maintenance operations for entire Air France fleet</description>
+    <responsable>Vincent D'Andrea</responsable>
+    <note>Oversees line maintenance and heavy maintenance operations. EASA PART-145 certified organization</note>
+    <sous_departements>
+      <sous_departement nom="line-maintenance"/>
+    </sous_departements>
+  </departement>
+
+  <!-- ===== LINE MAINTENANCE ===== -->
+  <departement id="line-maintenance" nom="Line Maintenance" parent="aircraft-maintenance" type="operational">
+    <description>Line Maintenance Operations - Preventive and corrective maintenance during flight operations</description>
+    <responsable>To be assigned</responsable>
+    <note>Handles daily checks, transit checks, and unscheduled maintenance (AOG situations) at airport stations</note>
+    <dep_postes>
+      <dep_poste id="1004">
+        <postetask id="2007"/>
+        <postetask id="2008"/>
+        <postetask id="2009"/>
+        <postedoc id="5001" page_reference="PART-145 Maintenance Operations"/>
+      </dep_poste>
+      <dep_poste id="1005">
+        <postetask id="2010"/>
+        <postetask id="2011"/>
+        <postetask id="2012"/>
+        <postedoc id="5003" page_reference="AMM Procedures"/>
+      </dep_poste>
+    </dep_postes>
+    <dep_tasks>
+      <dep_task id="2007">
+        <taskposte id="1004"/>
+        <taskdoc id="5001"/>
+        <taskdoc id="5010"/>
+      </dep_task>
+      <dep_task id="2008">
+        <taskposte id="1004"/>
+        <taskdoc id="5001"/>
+      </dep_task>
+      <dep_task id="2009">
+        <taskposte id="1004"/>
+        <taskdoc id="5001"/>
+        <taskdoc id="5005"/>
+      </dep_task>
+      <dep_task id="2010">
+        <taskposte id="1005"/>
+        <taskdoc id="5003"/>
+      </dep_task>
+      <dep_task id="2011">
+        <taskposte id="1005"/>
+        <taskdoc id="5004"/>
+      </dep_task>
+      <dep_task id="2012">
+        <taskposte id="1005"/>
+        <taskdoc id="5006"/>
+      </dep_task>
+    </dep_tasks>
+    <dep_documents>
+      <dep_document id="5001">
+        <doctask id="2007"/>
+        <doctask id="2008"/>
+      </dep_document>
+      <dep_document id="5003">
+        <doctask id="2010"/>
+      </dep_document>
+      <dep_document id="5005">
+        <doctask id="2009"/>
+      </dep_document>
+    </dep_documents>
+  </departement>
+
+  <!-- ===== FLIGHT OPERATIONS ===== -->
+  <departement id="flight-operations" nom="Flight Operations Management" parent="dir-gen" type="operational">
+    <description>Direction of Flight Operations - Manages flight crew and operational procedures</description>
+    <responsable>Laurent Lafontan</responsable>
+    <note>Responsible for pilot operations, crew scheduling, and flight dispatch. EASA PART-ORO compliant</note>
+    <sous_departements>
+      <sous_departement nom="pilot-management"/>
+      <sous_departement nom="crew-scheduling"/>
+      <sous_departement nom="flight-dispatch"/>
+    </sous_departements>
+  </departement>
+
+  <!-- ===== PILOT MANAGEMENT ===== -->
+  <departement id="pilot-management" nom="Pilot Management &amp; Procedures" parent="flight-operations" type="operational">
+    <description>Pilot Management - Standardization and procedures for flight crews</description>
+    <responsable>To be assigned</responsable>
+    <note>Manages pilot training, standardization of flight procedures, flight safety and pilot licensing compliance</note>
+    <dep_postes>
+      <dep_poste id="1006">
+        <postetask id="2016"/>
+        <postetask id="2018"/>
+        <postedoc id="5011" page_reference="Operations Manual"/>
+      </dep_poste>
+    </dep_postes>
+    <dep_tasks>
+      <dep_task id="2016">
+        <taskposte id="1006"/>
+        <taskdoc id="5011"/>
+      </dep_task>
+      <dep_task id="2018">
+        <taskposte id="1006"/>
+        <taskdoc id="5006"/>
+      </dep_task>
+    </dep_tasks>
+    <dep_documents>
+      <dep_document id="5011">
+        <doctask id="2016"/>
+      </dep_document>
+    </dep_documents>
+  </departement>
+
+  <!-- ===== CREW SCHEDULING ===== -->
+  <departement id="crew-scheduling" nom="Crew Scheduling &amp; Planning" parent="flight-operations" type="operational">
+    <description>Crew Scheduling - Planning and scheduling of flight crew with rest requirements</description>
+    <responsable>To be assigned</responsable>
+    <note>Critical for EASA Flight Time Limitations compliance. Handles scheduling, disruption management, and crew rest regulations</note>
+    <dep_postes>
+      <dep_poste id="1007">
+        <postetask id="2019"/>
+        <postetask id="2020"/>
+        <postetask id="2021"/>
+        <postedoc id="5002" page_reference="EASA PART-ORO Section 1"/>
+      </dep_poste>
+    </dep_postes>
+    <dep_tasks>
+      <dep_task id="2019">
+        <taskposte id="1007"/>
+        <taskdoc id="5002"/>
+      </dep_task>
+      <dep_task id="2020">
+        <taskposte id="1007"/>
+        <taskdoc id="5002"/>
+      </dep_task>
+      <dep_task id="2021">
+        <taskposte id="1007"/>
+        <taskdoc id="5002"/>
+      </dep_task>
+    </dep_tasks>
+    <dep_documents>
+      <dep_document id="5002">
+        <doctask id="2019"/>
+        <doctask id="2020"/>
+        <doctask id="2021"/>
+      </dep_document>
+    </dep_documents>
+  </departement>
+
+  <!-- ===== FLIGHT DISPATCH ===== -->
+  <departement id="flight-dispatch" nom="Flight Dispatch &amp; Operations Control" parent="flight-operations" type="operational">
+    <description>Flight Dispatch - Preparation and monitoring of flight operations</description>
+    <responsable>To be assigned</responsable>
+    <note>Responsible for flight planning, weather monitoring, and operational coordination. Interface with pilots and crew</note>
+    <dep_postes>
+      <dep_poste id="1008">
+        <postetask id="2022"/>
+        <postetask id="2023"/>
+        <postetask id="2024"/>
+        <postedoc id="5006" page_reference="Flight Planning Procedures"/>
+      </dep_poste>
+    </dep_postes>
+    <dep_tasks>
+      <dep_task id="2022">
+        <taskposte id="1008"/>
+        <taskdoc id="5009"/>
+      </dep_task>
+      <dep_task id="2023">
+        <taskposte id="1008"/>
+        <taskdoc id="5002"/>
+      </dep_task>
+      <dep_task id="2024">
+        <taskposte id="1008"/>
+        <taskdoc id="5006"/>
+      </dep_task>
+    </dep_tasks>
+    <dep_documents>
+      <dep_document id="5006">
+        <doctask id="2024"/>
+      </dep_document>
+      <dep_document id="5009">
+        <doctask id="2022"/>
+      </dep_document>
+    </dep_documents>
+  </departement>
+
+  <!-- ===== FINANCE &amp; ECONOMY ===== -->
+  <departement id="finance-economy" nom="Finance &amp; Economy" parent="dir-gen" type="support">
+    <description>Finance and Economic Management - Financial planning and economic analysis</description>
+    <responsable>Alexandre Baclet</responsable>
+    <note>Manages financial planning, budgets, and economic performance of the company</note>
+  </departement>
+
+  <!-- ===== OPERATIONS &amp; CARGO ===== -->
+  <departement id="operations-cargo" nom="Operations &amp; Cargo Management" parent="dir-gen" type="support">
+    <description>Operations and Cargo Management - Oversight of flight operations and cargo activities</description>
+    <responsable>Alain Hervé Bernard</responsable>
+    <note>Responsible for cargo operations coordination and flight operations supervision</note>
+  </departement>
+  </departements>
+  <!-- ===== POSTES (POSITIONS/ROLES) ===== -->
+  <postes>
+    <!-- Engineering Positions -->
+    <poste id="1001" nom="Airworthiness Engineer" description="Engineer responsible for airworthiness and navigability compliance" abbrev="AE" abbrev_desc="Airworthiness Engineer"/>
+    <poste id="1002" nom="Avionics Systems Engineer" description="Engineer for avionics and systems troubleshooting" abbrev="ASE" abbrev_desc="Avionics Engineer"/>
+    
+    <!-- Maintenance Planning -->
+    <poste id="1003" nom="Maintenance Planner" description="Planner for heavy maintenance checks and scheduling" abbrev="MP" abbrev_desc="Maintenance Planner"/>
+    
+    <!-- Line Maintenance -->
+    <poste id="1004" nom="Line Maintenance Manager" description="Manager supervising line maintenance teams during flight stops" abbrev="LMM" abbrev_desc="Line Maint Manager"/>
+    <poste id="1005" nom="Aircraft Mechanic B1" description="Technician performing hands-on maintenance interventions (EASA B1)" abbrev="TECH" abbrev_desc="Aircraft Mechanic"/>
+    
+    <!-- Flight Operations -->
+    <poste id="1006" nom="Chief Pilot (Fleet)" description="Chief pilot responsible for standardization and procedures" abbrev="CP" abbrev_desc="Chief Pilot"/>
+    <poste id="1007" nom="Crew Planner" description="Scheduler managing crew rosters and disruption management" abbrev="PLAN" abbrev_desc="Crew Planner"/>
+    <poste id="1008" nom="Flight Dispatcher" description="Dispatcher preparing flight plans and monitoring operations" abbrev="FD" abbrev_desc="Flight Dispatcher"/>
+  </postes>
+
+  <!-- ===== TASKS (Tâches Métier) ===== -->
+  <taches>
+    <!-- Engineering Tasks -->
+    <tache id="2001" nom="AD Tracking - Airworthiness Directives" description="Monitoring and tracking EASA Airworthiness Directives" criticite="Élevée" frequence="Hebdomadaire"/>
+    <tache id="2002" nom="Technical Modifications Management" description="Assessment and implementation of aircraft technical modifications" criticite="Élevée" frequence="Mensuelle"/>
+    <tache id="2003" nom="Maintenance Program Updates" description="Updating preventive maintenance scheduling programs" criticite="Élevée" frequence="Trimestrielle"/>
+    <tache id="2004" nom="Complex System Diagnostics" description="Avionics and systems troubleshooting for failures" criticite="Élevée" frequence="Quotidienne"/>
+    <tache id="2005" nom="Equipment Validation" description="Validation of new equipment and components" criticite="Moyenne" frequence="Mensuelle"/>
+    
+    <!-- Maintenance Planning Tasks -->
+    <tache id="2013" nom="Heavy Maintenance Planning" description="Planning of A-Checks, C-Checks and hangar visits" criticite="Élevée" frequence="Hebdomadaire"/>
+    <tache id="2014" nom="Aircraft Availability Coordination" description="Coordination with flight operations for aircraft availability" criticite="Élevée" frequence="Quotidienne"/>
+    
+    <!-- Line Maintenance Tasks -->
+    <tache id="2007" nom="Line Maintenance Supervision" description="Supervision of line maintenance teams during flight stops" criticite="Élevée" frequence="Quotidienne"/>
+    <tache id="2008" nom="Pre-Flight Maintenance Coordination" description="Coordination of pre-flight maintenance checks" criticite="Élevée" frequence="Quotidienne"/>
+    <tache id="2009" nom="AOG Management (CRITICAL)" description="Management of Aircraft on Ground (unschedulable aircraft) situations" criticite="CRITIQUE" frequence="Quotidienne"/>
+    <tache id="2010" nom="Transit Checks" description="Quick system checks during flight stops" criticite="Élevée" frequence="Quotidienne"/>
+    <tache id="2011" nom="LRU Component Replacement" description="Replacement of line-replaceable units and components" criticite="Élevée" frequence="Quotidienne"/>
+    <tache id="2012" nom="Technical Log Documentation" description="Recording maintenance actions in technical logs" criticite="Élevée" frequence="Quotidienne"/>
+    
+    <!-- Flight Operations Tasks -->
+    <tache id="2016" nom="Flight Procedure Standardization" description="Supervision of flight procedure standards and crew training" criticite="Élevée" frequence="Hebdomadaire"/>
+    <tache id="2018" nom="Flight Report Analysis" description="Analysis of flight reports for safety improvement" criticite="Élevée" frequence="Hebdomadaire"/>
+    <tache id="2019" nom="Monthly Crew Schedules" description="Creation of monthly flight crew schedules" criticite="Élevée" frequence="Mensuelle"/>
+    <tache id="2020" nom="Crew Disruption Management" description="Real-time management of crew changes and disruptions" criticite="Élevée" frequence="Quotidienne"/>
+    <tache id="2021" nom="Crew Rest Optimization (CRITICAL)" description="Optimization of crew rotations respecting EASA Flight Time Limitations" criticite="CRITIQUE" frequence="Hebdomadaire"/>
+    <tache id="2022" nom="Flight Plan Preparation" description="Calculation and filing of flight plans with fuel and routing" criticite="Élevée" frequence="Quotidienne"/>
+    <tache id="2023" nom="Weather &amp; NOTAM Monitoring" description="Monitoring weather conditions and notices to airmen" criticite="Élevée" frequence="Quotidienne"/>
+    <tache id="2024" nom="In-Flight Crew Support" description="Operational support to flight crew during flight" criticite="Élevée" frequence="Quotidienne"/>
+  </taches>
+
+  <!-- ===== DOCUMENTS (Régulations, Manuels) ===== -->
+  <documents>
+    <document id="5001" nom="EASA PART-145 - Maintenance Certification" type="Regulation" authority="EASA" reference="EASA PART-145" url="https://www.easa.europa.eu/en/document-library/regulations" description="Certification and approval requirements for aircraft maintenance organizations"/>
+    <document id="5002" nom="EASA PART-ORO - Air Operations" type="Regulation" authority="EASA" reference="EASA PART-ORO" url="https://www.easa.europa.eu/en/document-library/regulations" description="Operational rules for air operators and flight time limitations"/>
+    <document id="5003" nom="Aircraft Maintenance Manual (AMM)" type="Technical Manual" authority="Aircraft Manufacturer" reference="AMM-A320" url="https://www.airbus.com" description="Detailed maintenance procedures provided by aircraft manufacturer"/>
+    <document id="5004" nom="Illustrated Parts Catalog (IPC)" type="Reference" authority="Aircraft Manufacturer" reference="IPC-A320" url="https://www.airbus.com" description="Illustrated parts list and component catalog"/>
+    <document id="5005" nom="Non-Routine Card (NRC)" type="Form" authority="Air France Maintenance" reference="NRC-AF-001" url="Internal" description="Form for documenting unscheduled and corrective maintenance work"/>
+    <document id="5006" nom="Operations Manual (OM)" type="Procedures" authority="Air France" reference="OM-AF-2024" url="Internal" description="Operational procedures manual for Air France flight crews"/>
+    <document id="5008" nom="Maintenance Planning Data (MPD)" type="Program" authority="Aircraft Manufacturer" reference="MPD-A320" url="https://www.boeing.com" description="Manufacturer maintenance planning and scheduling data"/>
+    <document id="5009" nom="Fuel Dumping Procedures" type="Procedures" authority="Air France" reference="PROC-FUL-001" url="Internal" description="Emergency fuel dump procedures for operational safety"/>
+    <document id="5010" nom="Ground Operations Manual" type="Manual" authority="Air France Maintenance" reference="GMAN-001" url="Internal" description="Handbook for ground maintenance and line operations"/>
+    <document id="5011" nom="Pilot Training Manual" type="Manual" authority="Air France Flight Training" reference="PTM-A320" url="Internal" description="Training and procedures manual for Air France pilots"/>
+    <document id="5009" nom="Airworthiness Directives (AD)" type="Regulations" authority="EASA" reference="AD-EASA-2024" url="https://ad.easa.europa.eu/" description="EASA Airworthiness Directives requiring mandatory compliance"/>
+  </documents>
+
+</organisation>
