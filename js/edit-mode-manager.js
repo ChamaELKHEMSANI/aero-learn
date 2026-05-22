@@ -6,27 +6,21 @@
         this.lng = 'en';
         this.assetManager = assetManager;
         this.tab_assets = tab_assets;
-
         this.currentXmlFile = currentXmlFile;
         this.clipboard = null;
         this.selectedDeptForToolbar = null;
         this.visualSearchMode = 'departements';
         this.toolbarPositions = {};
-
         this.departmentsView= null;
         this.tasksView= null;
         this.documentsView= null;
         this.organisationView = null;
-
         this.translations = {
             en: {
-                // Utilisés dans createUI() et toggleEditMode()
                 editMode: 'Edit Mode',
                 exitEditMode: 'Exit Edit Mode',
                 configuration: 'Configuration',
                 fileManagement: 'File Management',
-                
-                // Utilisés dans createEditToolbar()
                 noDepartmentSelected: 'No department selected',
                 editDepartment: 'Edit',
                 addDepartment: 'Add',
@@ -55,15 +49,11 @@
                 tasks: 'Tasks',
                 noSearchResult: 'No result for "{term}"',
                 documentReadOnly: 'This organisation chart is read-only. Unlock it from Organisation to edit it.',
-
-                // Utilisés dans cutDepartmentById(), copyDepartmentById()
                 departmentNotFound: 'Department not found',
                 cannotCutRoot: 'Cannot cut root department',
                 cannotCopyRoot: 'Cannot copy root department',
                 departmentCopied: 'Department "{name}" copied',
                 departmentCut: 'Department "{name}" cut (paste to move)',
-                
-                // Utilisés dans pasteDepartment()
                 nothingToPaste: 'Nothing to paste',
                 parentDepartmentNotFound: 'Parent department not found',
                 cannotMoveIntoDescendant: 'Cannot move a department into its own descendant',
@@ -72,29 +62,20 @@
                 errorPasting: 'Error pasting',
                 pasteSuccess: 'Department pasted under "{parentName}"',
                 moveSuccess: 'Department "{deptName}" moved under "{parentName}"',
-                
-                // Utilisés dans handleDepartmentMove()
                 errorMovingDepartment: 'Error moving department',
                 cannotMoveIntoDescendant: 'Cannot move a department into its own descendant',
                 departmentAlreadyUnderParent: 'Department is already under this parent',
                 departmentMoved: 'Department moved successfully',
-                
-                // Utilisés dans refreshDiagram()
                 diagramNotInitialized: 'Diagram not properly initialized',
-                
-                // Utilisés dans showNotification() (messages passés depuis d'autres méthodes)
                 success: 'Success',
                 error: 'Error',
                 info: 'Info'
             },
             fr: {
-                // Utilisés dans createUI() et toggleEditMode()
                 editMode: 'Mode èdition',
                 exitEditMode: 'Quitter le Mode èdition',
                 configuration: 'Configuration',
                 fileManagement: 'Gestion des fichiers',
-                
-                // Utilisés dans createEditToolbar()
                 noDepartmentSelected: 'Aucun département sélectionné',
                 editDepartment: 'Modifier',
                 addDepartment: 'Ajouter',
@@ -123,15 +104,11 @@
                 tasks: 'Tâches',
                 noSearchResult: 'Aucun résultat pour "{term}"',
                 documentReadOnly: 'Cet organigramme est en lecture seule. Déverrouillez-le depuis Organisation pour le modifier.',
-                
-                // Utilisés dans cutDepartmentById(), copyDepartmentById()
                 departmentNotFound: 'Département non trouvé',
                 cannotCutRoot: 'Impossible de couper le département racine',
                 cannotCopyRoot: 'Impossible de copier le département racine',
                 departmentCopied: 'Département "{name}" copié',
                 departmentCut: 'Département "{name}" coupé (collez pour déplacer)',
-                
-                // Utilisés dans pasteDepartment()
                 nothingToPaste: 'Rien Ã  coller',
                 parentDepartmentNotFound: 'Département parent non trouvé',
                 cannotMoveIntoDescendant: 'Impossible de déplacer un département dans son propre descendant',
@@ -140,23 +117,16 @@
                 errorPasting: 'Erreur lors du collage',
                 pasteSuccess: 'Département collé sous "{parentName}"',
                 moveSuccess: 'Département "{deptName}" déplacé sous "{parentName}"',
-                
-                // Utilisés dans handleDepartmentMove()
                 errorMovingDepartment: 'Erreur lors du déplacement du département',
                 cannotMoveIntoDescendant: 'Impossible de déplacer un département dans son propre descendant',
                 departmentAlreadyUnderParent: 'Le département est déjÃ  sous ce parent',
                 departmentMoved: 'Département déplacé avec succÃ¨s',
-                
-                // Utilisés dans refreshDiagram()
                 diagramNotInitialized: 'Diagramme non initialisé correctement',
-                
-                // Utilisés dans showNotification() (messages passés depuis d'autres méthodes)
                 success: 'Succés',
                 error: 'Erreur',
                 info: 'Info'
             }
         };
-
         this.exportManager = new EditExportManager(xmlParser);
         this.autoSaveManager = new AutoSaveManager(xmlParser);
         this.messageManager = new EditMessageManager(this.lng);
@@ -165,13 +135,10 @@
         this.projectManager = new EditProjectManager(this);
         this.departmentManager = new EditDepartmentManager(this);
         this.init();
-
         window.addEventListener('beforeunload', () => {
             this.cleanupDragDrop();
         });
     }
-
-    
     setLang(lng) {
         this.lng = lng;
         if (this.diagramme) { this.diagramme.setLang(lng);}
@@ -188,17 +155,13 @@
             window.app.queryDetails.setLang(lng);
         }
     }
-
     translate(key, params = {}) {
         let text = this.translations[this.lng]?.[key] || this.translations['en'][key] || key;
-
         Object.keys(params).forEach(param => {
             text = text.replace(`{${param}}`, params[param]);
         });
-
         return text;
     }
-
     async init() {
         this.createUI();
         await this.autoSaveManager.init();
@@ -229,12 +192,7 @@
                 this.organisationView = new EditViewOrganisation(this);
             }
          }
-
     }
-
-    /**
-     * Ouvre la vue des départements;Taches et documents
-     */
     showView(mode) {
         this.initView(mode);
        if(mode=="organisation"){
@@ -249,72 +207,57 @@
        if(mode=="documents"){
          this.documentsView.open();
         }      
-              
     }
     loadConfigFromStorage() {
         if (this.configManager)
             this.configManager.loadConfigFromStorage();
     }
-
     async restoreLastSave() {
         if (this.autoSaveManager)
             this.autoSaveManager.restoreLastSave();
     }
-
     triggerAutoSave() {
         if (this.autoSaveManager && this.currentXmlFile && this.configManager.appConfig.autoSave) {
             this.autoSaveManager.scheduleAutoSave(this.currentXmlFile);
         }
     }
-
     isDocumentReadOnly() {
         return Boolean(this.xmlParser?.isReadOnly?.());
     }
-
     ensureDocumentWritable() {
         if (!this.isDocumentReadOnly()) {
             return true;
         }
-
         this.showNotification(this.translate('documentReadOnly'), 'warning');
         return false;
     }
-
     isToggleInteraction(target) {
         return Boolean(
             target?.closest?.('.toggle-hit-area') ||
             target?.closest?.('.toggle')
         );
     }
-
     updateDiagramme(id){
         if (this.diagramme)
-            console.log("edit mode updateDiagramme",id);
             this.diagramme.drawDepartement(id);
-
         }
     showNotification(message, type, temporisation = 5) {
         if (this.messageManager) {
             this.messageManager.showNotification(message, type, temporisation);
         }
     }
-
     async showConfirm(message, title) {
         if (this.messageManager) {
             return await this.messageManager.showConfirm(message, title);
         }
     }
-
     async showAlert(message, title = 'Alert') {
         if (this.messageManager) {
             return await this.messageManager.showAlert(message,title);
         }
     }
-
     createUI() {
         document.body.classList.add('has-edit-floating-buttons');
-
-        // Bouton de configuration
         const configBtn = document.createElement('button');
         configBtn.className = 'config-btn';
         configBtn.innerHTML = `
@@ -330,8 +273,6 @@
         configBtn.style.right = '20px';
         configBtn.style.zIndex = '1001';
         document.body.appendChild(configBtn);
-
-        // Bouton de mode édition
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'edit-mode-toggle';
         toggleBtn.innerHTML = `
@@ -346,12 +287,8 @@
         toggleBtn.style.right = '70px';
         toggleBtn.style.zIndex = '1001';
         document.body.appendChild(toggleBtn);
-
-        // Créer la toolbar
         this.createEditToolbar();
         this.createViewToolbar();
-
-        // Bouton de gestion des fichiers
         const fileBtn = document.createElement('button');
         fileBtn.className = 'file-management-btn';
         fileBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -362,11 +299,8 @@
         fileBtn.id = 'file-management-btn';
         fileBtn.title = this.translate('fileManagement');
         document.body.appendChild(fileBtn);
-
-        // Attacher les event listeners
         this.attachEventListeners();
     }
-
     createEditToolbar() {
         const toolbar = document.createElement('div');
         toolbar.className = 'edit-context-toolbar';
@@ -447,17 +381,13 @@
                 </div>
             </div>
         `;
-
         toolbar.style.display = 'none';
         document.body.appendChild(toolbar);
         this.makeToolbarDraggable(toolbar);
-
     }
-
     createViewToolbar() {
         const existing = document.getElementById('view-context-toolbar');
         if (existing) existing.remove();
-
         const toolbar = document.createElement('div');
         toolbar.className = 'view-context-toolbar';
         toolbar.id = 'view-context-toolbar';
@@ -472,18 +402,18 @@
             </div>
             <div class="view-toolbar-main">
                 <div class="edit-toolbar-buttons view-toolbar-buttons">
-                    <!--button class="edit-toolbar-btn view-toolbar-btn " id="view-toolbar-organisation" title="${this.translate('organization')}">
+                    <button class="edit-toolbar-btn view-toolbar-btn " id="view-toolbar-organisation" title="${this.translate('organization')}">
                         <span>${this.translate('organization')}</span>
-                    </button-->
-                    <!--button class="edit-toolbar-btn view-toolbar-btn " id="view-toolbar-departements" title="${this.translate('departments')}">
+                    </button>
+                    <button class="edit-toolbar-btn view-toolbar-btn " id="view-toolbar-departements" title="${this.translate('departments')}">
                         <span>${this.translate('departments')}</span>
-                    </button-->
-                    <!--button class="edit-toolbar-btn view-toolbar-btn" id="view-toolbar-documents" title="${this.translate('documents')}">
+                    </button>
+                    <button class="edit-toolbar-btn view-toolbar-btn" id="view-toolbar-documents" title="${this.translate('documents')}">
                         <span>${this.translate('documents')}</span>
-                    </button-->
-                    <!--button class="edit-toolbar-btn view-toolbar-btn" id="view-toolbar-taches" title="${this.translate('tasks')}">
+                    </button>
+                    <button class="edit-toolbar-btn view-toolbar-btn" id="view-toolbar-taches" title="${this.translate('tasks')}">
                         <span>${this.translate('tasks')}</span>
-                    </button-->
+                    </button>
                 </div>
                 <div class="view-toolbar-search-row">
                     <div class="view-toolbar-search-group">
@@ -505,19 +435,15 @@
                 </div>
             </div>
         `;
-
         toolbar.style.display = 'flex';
         document.body.appendChild(toolbar);
         this.makeToolbarDraggable(toolbar);
         this.setVisualSearchMode(this.visualSearchMode);
     }
-
     makeToolbarDraggable(toolbar) {
         if (!toolbar) return;
-
         const grip = toolbar.querySelector('.toolbar-drag-grip');
         if (!grip) return;
-
         const resetPosition = () => {
             if (window.innerWidth <= 768) {
                 toolbar.style.left = '';
@@ -527,129 +453,96 @@
                 delete this.toolbarPositions[toolbar.id];
                 return true;
             }
-
             return false;
         };
-
         const applySavedPosition = () => {
             const savedPosition = this.toolbarPositions[toolbar.id];
             if (!savedPosition || resetPosition()) return;
-
             toolbar.style.left = `${savedPosition.left}px`;
             toolbar.style.top = `${savedPosition.top}px`;
             toolbar.style.transform = 'none';
             toolbar.classList.add('toolbar-is-dragged');
         };
-
         const clampPosition = (left, top) => {
             const rect = toolbar.getBoundingClientRect();
             const maxLeft = Math.max(8, window.innerWidth - rect.width - 8);
             const minTop = 8;
             const maxTop = Math.max(minTop, window.innerHeight - rect.height - 8);
-
             return {
                 left: Math.min(Math.max(8, left), maxLeft),
                 top: Math.min(Math.max(minTop, top), maxTop)
             };
         };
-
         let dragState = null;
-
         grip.addEventListener('pointerdown', (event) => {
             if (resetPosition()) return;
-
             const rect = toolbar.getBoundingClientRect();
             dragState = {
                 offsetX: event.clientX - rect.left,
                 offsetY: event.clientY - rect.top
             };
-
             toolbar.classList.add('toolbar-is-dragged');
             toolbar.style.transform = 'none';
             grip.setPointerCapture(event.pointerId);
             event.preventDefault();
         });
-
         grip.addEventListener('pointermove', (event) => {
             if (!dragState) return;
-
             const nextPosition = clampPosition(
                 event.clientX - dragState.offsetX,
                 event.clientY - dragState.offsetY
             );
-
             toolbar.style.left = `${nextPosition.left}px`;
             toolbar.style.top = `${nextPosition.top}px`;
             this.toolbarPositions[toolbar.id] = nextPosition;
         });
-
         const stopDrag = (event) => {
             if (!dragState) return;
-
             if (event && grip.hasPointerCapture(event.pointerId)) {
                 grip.releasePointerCapture(event.pointerId);
             }
-
             dragState = null;
         };
-
         grip.addEventListener('pointerup', stopDrag);
         grip.addEventListener('pointercancel', stopDrag);
         window.addEventListener('resize', applySavedPosition);
-
         applySavedPosition();
     }
-
     attachEventListeners() {
-        // Toggle edit mode
         const toggleBtn = document.getElementById('edit-mode-toggle');
-
-        // Supprimer l'ancien event listener s'il existe pour éviter les doublons
         if (toggleBtn._editModeClickHandler) {
             toggleBtn.removeEventListener('click', toggleBtn._editModeClickHandler);
         }
-
-        // Créer et stocker la référence de l'event handler
         toggleBtn._editModeClickHandler = () => {
             this.toggleEditMode();
         };
-
         toggleBtn.addEventListener('click', toggleBtn._editModeClickHandler);
-
         document.getElementById('config-btn').addEventListener('click', () => {
             this.configManager.showConfigModal();
         });
-
-        // Gestion des fichiers
         document.getElementById('file-management-btn').addEventListener('click', () => {
             this.fileManager.showFileManagement();
         });
-
-
         document.getElementById('edit-toolbar-edit')?.addEventListener('click', () => {
             if (this.departmentManager && this.selectedDeptForToolbar && this.selectedDeptForToolbar.id) {
                 this.editDepartmentById(this.selectedDeptForToolbar.id);
             }
         });
-
         document.getElementById('edit-toolbar-add')?.addEventListener('click', () => {
             if (this.departmentManager && this.selectedDeptForToolbar && this.selectedDeptForToolbar.id) {
                 this.addChildDepartmentById(this.selectedDeptForToolbar.id);
             }
         });
-
         document.getElementById('edit-toolbar-duplicate')?.addEventListener('click', () => {
             if (this.departmentManager && this.selectedDeptForToolbar && this.selectedDeptForToolbar.id) {
                 this.duplicateDepartmentById(this.selectedDeptForToolbar.id);
             }
         });
-
         document.getElementById('edit-toolbar-delete')?.addEventListener('click', () => {
             if (this.departmentManager && this.selectedDeptForToolbar && this.selectedDeptForToolbar.id) {
                 this.deleteDepartmentById(this.selectedDeptForToolbar.id);
             }
         });
-
         document.getElementById('edit-toolbar-cut')?.addEventListener('click', () => {
             if (this.selectedDeptForToolbar && this.selectedDeptForToolbar.id) {
                 this.cutDepartmentById(this.selectedDeptForToolbar.id);
@@ -660,11 +553,9 @@
                 this.copyDepartmentById(this.selectedDeptForToolbar.id);
             }
         });
-
         document.getElementById('edit-toolbar-paste')?.addEventListener('click', () => {
             this.pasteDepartment();
         });
-
         document.getElementById('edit-toolbar-refresh')?.addEventListener('click', () => {
             this.refreshWithSelection();
         });
@@ -677,18 +568,6 @@
         document.getElementById('edit-toolbar-toggle-details')?.addEventListener('click', () => {
             this.toggleDetailsVisibility();
         });
-        //document.getElementById('view-toolbar-departements')?.addEventListener('click', () => {
-        //     this.showView("departements");
-        //});
-        //document.getElementById('view-toolbar-organisation')?.addEventListener('click', () => {
-        //     this.showView("organisation");
-        //});
-        //document.getElementById('view-toolbar-documents')?.addEventListener('click', () => {
-        //     this.showView("documents");
-        //});
-        //document.getElementById('view-toolbar-taches')?.addEventListener('click', () => {
-        //     this.showView("tasks");
-        //});
         document.getElementById('view-toolbar-search-scope')?.addEventListener('change', (e) => {
             this.setVisualSearchMode(e.target.value);
         });
@@ -706,81 +585,62 @@
                 this.hideSearchSuggestions();
             }
         });
-        // Modifiez les écouteurs de clic sur les noeuds pour mettre Ã  jour la toolbar
         document.addEventListener('click', (e) => {
             if (!this.isEditMode) return;
             if (this.isToggleInteraction(e.target)) return;
-
-            // Vérifier si le clic est sur un noeud
             const nodeElement = e.target.closest('.node');
             if (nodeElement) {
                 e.stopPropagation();
                 e.preventDefault();
-
                 const d3Node = d3.select(nodeElement).datum();
                 if (d3Node) {
                     this.updateEditToolbar(d3Node);
                 }
             } else if (!e.target.closest('.edit-context-toolbar')) {
-                // Clic en dehors de la toolbar et d'un noeud
-                //this.updateEditToolbar(null);
             }
         });
-
         this.attachNodeClickListeners();
     }
-
     setViewContentTab(tabName) {
         const map = {
             general: 'view-toolbar-departements',
             documents: 'view-toolbar-documents',
             taches: 'view-toolbar-taches'
         };
-
         document.querySelectorAll('.view-toolbar-btn').forEach((btn) => btn.classList.remove('active'));
         const activeBtn = document.getElementById(map[tabName]);
         if (activeBtn) activeBtn.classList.add('active');
-
         if (window.app && window.app.queryDetails && typeof window.app.queryDetails.switchTab === 'function') {
             window.app.queryDetails.switchTab(tabName);
         }
     }
-
     setVisualSearchMode(mode) {
         this.visualSearchMode = mode;
-
         const placeholderByMode = {
             departements: this.translate('searchPlaceholderDepartments'),
             documents: this.translate('searchPlaceholderDocuments'),
             taches: this.translate('searchPlaceholderTasks')
         };
-
         const input = document.getElementById('view-toolbar-search');
         if (input) {
             input.placeholder = placeholderByMode[mode] || this.translate('searchPlaceholderDepartments');
         }
-
         const scopeSelect = document.getElementById('view-toolbar-search-scope');
         if (scopeSelect && scopeSelect.value !== mode) {
             scopeSelect.value = mode;
         }
-
         const currentValue = input ? input.value : '';
         this.updateSearchSuggestions(currentValue || '');
     }
-
     getSearchSuggestions(rawTerm) {
         const term = String(rawTerm || '').trim();
         if (term.length < 3) return [];
-
         const query = term.toLowerCase();
         const suggestions = [];
-
         if (this.visualSearchMode === 'departements') {
             const matches = this.xmlParser.searchDepartements(query)
                 .filter((dept) => dept && dept.id && dept.id !== 'root')
                 .slice(0, 12);
-
             matches.forEach((dept) => {
                 suggestions.push({
                     label: dept.nom || dept.id,
@@ -796,7 +656,6 @@
                 (doc.ref || '').toLowerCase().includes(query) ||
                 (doc.lien || '').toLowerCase().includes(query)
             ).slice(0, 12);
-
             docs.forEach((doc) => {
                 const departmentId = doc?.departments?.[0];
                 if (!departmentId) return;
@@ -812,7 +671,6 @@
                 (task.description || '').toLowerCase().includes(query) ||
                 (task.categorie || '').toLowerCase().includes(query)
             ).slice(0, 12);
-
             tasks.forEach((task) => {
                 const departmentId = task?.departments?.[0];
                 if (!departmentId) return;
@@ -823,29 +681,23 @@
                 });
             });
         }
-
         return suggestions;
     }
-
     updateSearchSuggestions(rawTerm) {
         const container = document.getElementById('view-toolbar-suggestions');
         if (!container) return;
-
         const suggestions = this.getSearchSuggestions(rawTerm);
         if (!suggestions.length) {
             this.hideSearchSuggestions();
             return;
         }
-
         container.innerHTML = suggestions.map((item) => `
             <button type="button" class="view-suggestion-item" data-dept-id="${item.departmentId}">
                 <span class="view-suggestion-label">${item.label}</span>
                 <span class="view-suggestion-sub">${item.sublabel || ''}</span>
             </button>
         `).join('');
-
         container.style.display = 'block';
-
         container.querySelectorAll('.view-suggestion-item').forEach((btn) => {
             btn.addEventListener('click', () => {
                 const deptId = btn.getAttribute('data-dept-id');
@@ -857,56 +709,43 @@
             });
         });
     }
-
     hideSearchSuggestions() {
         const container = document.getElementById('view-toolbar-suggestions');
         if (!container) return;
         container.style.display = 'none';
         container.innerHTML = '';
     }
-
     navigateToDepartment(targetDeptId) {
         if (!targetDeptId) return;
-
         this.updateSelectedDepartmentById(targetDeptId);
-
         if (this.diagramme && typeof this.diagramme.navigateToDepartmentFromSelect === 'function') {
             this.diagramme.navigateToDepartmentFromSelect(targetDeptId);
         }
-
         if (window.app && window.app.queryDetails && typeof window.app.queryDetails.showDepartmentDetailsId === 'function') {
             window.app.queryDetails.showDepartmentDetailsId(targetDeptId);
         }
     }
-
     performVisualSearch(rawTerm) {
         const term = String(rawTerm || '').trim();
         if (!term) return;
         const suggestions = this.getSearchSuggestions(term);
         const targetDeptId = suggestions[0]?.departmentId || null;
-
         if (!targetDeptId) {
             this.showNotification(this.translate('noSearchResult', { term }), 'info');
             return;
         }
         this.navigateToDepartment(targetDeptId);
     }
-
     attachNodeClickListeners() {
         if (this._nodeClickHandler) {
             document.removeEventListener('click', this._nodeClickHandler, true);
         }
-
         this._nodeClickHandler = (e) => {
             if (this.isToggleInteraction(e.target)) {
                 return;
             }
-
-            // Vérifier si le clic est sur un noeud
             let targetElement = e.target;
             let nodeElement = null;
-
-            // Rechercher l'élément .node parent
             while (targetElement && targetElement !== document.body) {
                 if (targetElement.classList && targetElement.classList.contains('node')) {
                     nodeElement = targetElement;
@@ -914,20 +753,14 @@
                 }
                 targetElement = targetElement.parentElement;
             }
-
             if (nodeElement) {
-                // Récupérer les données D3 du noeud
                 const d3Node = d3.select(nodeElement).datum();
-
                 if (d3Node) {
                     if (this.isEditMode) {
                         this.updateEditToolbar(d3Node);
                     } else {
                         this.updateSelectedDepartment(d3Node);
                     }
-
-                    // Mettre en surbrillance le noeud sélectionné
-                    //d3.selectAll('.node').classed('selected', false);
                     d3.select(nodeElement).classed('selected', true);
                 }
             } else if (!e.target.closest('.edit-context-toolbar') &&
@@ -935,23 +768,16 @@
                 !e.target.closest('#edit-modal') &&
                 !e.target.closest('#confirm-dialog') &&
                 !e.target.closest('#config-modal')) {
-                // Clic en dehors de la toolbar, des contrÃ´les SVG et des modals
-                // Désélectionner le noeud actuel
-                //d3.selectAll('.node').classed('selected', false);
-                //this.updateEditToolbar(null);
             }
         };
-
         document.addEventListener('click', this._nodeClickHandler, true);
     }
-
     updateSelectedDepartment(d3Node) {
         if (!d3Node || !d3Node.data || !d3Node.data.data) {
             this.selectedDeptForToolbar = null;
             this.updateViewToolbarDepartment();
             return;
         }
-
         this.selectedDeptForToolbar = {
             id: d3Node.data.data.id,
             nom: d3Node.data.data.nom,
@@ -960,61 +786,44 @@
             d3Node: d3Node,
             element: d3Node
         };
-
         this.updateViewToolbarDepartment();
     }
-
     updateSelectedDepartmentById(deptId) {
         if (!deptId) {
             this.selectedDeptForToolbar = null;
             this.updateViewToolbarDepartment();
             return;
         }
-
         const deptData = this.xmlParser?.getDepartement?.(deptId);
         if (!deptData) return;
-
         this.selectedDeptForToolbar = {
             ...(this.selectedDeptForToolbar || {}),
             id: deptId,
             nom: deptData.nom,
             data: deptData
         };
-
         this.updateViewToolbarDepartment();
     }
-
     updateViewToolbarDepartment() {
         const deptSpan = document.getElementById('view-toolbar-department');
         if (!deptSpan) return;
-
         deptSpan.textContent = this.selectedDeptForToolbar?.nom || this.translate('noDepartmentSelected');
     }
-
     exportDiagram() {
         if (this.exportManager) {
             this.exportManager.showExportDialog(this.diagramme.diagramme);
         }
     }
-
     exportProject() {
         if (this.exportManager) {
             this.projectManager.showHtmlExportDialog();
         }
     }
-
     refreshWithSelection() {
         if (!this.isEditMode) return;
-
-        // Mémoriser le département actuellement sélectionné
         const selectedDeptId = this.selectedDeptForToolbar ? this.selectedDeptForToolbar.id : null;
         const selectedDeptName = this.selectedDeptForToolbar ? this.selectedDeptForToolbar.nom : null;
-
-        // Rafraêchir le diagramme
         this.refreshDiagram();
-
-        // AprÃ¨s un délai pour que le diagramme soit complÃ¨tement rafraêchi,
-        // restaurer la sélection si un département était sélectionné
         if (selectedDeptId) {
             setTimeout(() => {
                 this.restoreSelection(selectedDeptId, selectedDeptName);
@@ -1022,13 +831,10 @@
             }, 800);
         }
     }
-
     restoreSelection(deptId, deptName = null) {
         if (!deptId || !this.isEditMode) return;
-
         const nodeElements = document.querySelectorAll('.node-text, .node-name, .node-label');
         let nodeElement = null;
-
         for (const element of nodeElements) {
             if (element.textContent.includes(deptName) ||
                 element.textContent.includes(deptId)) {
@@ -1036,7 +842,6 @@
                 break;
             }
         }
-
         if (!nodeElement) {
             const allNodes = document.querySelectorAll('.node');
             allNodes.forEach(node => {
@@ -1046,20 +851,12 @@
                 }
             });
         }
-
         if (nodeElement) {
-            // Récupérer les données D3
             const d3Node = d3.select(nodeElement).datum();
-
             if (d3Node && d3Node.data && d3Node.data.data) {
-                // Mettre Ã  jour la toolbar
                 this.updateEditToolbar(d3Node);
-
-                // Mettre en surbrillance le noeud
                 d3.selectAll('.node').classed('selected', false);
                 d3.select(nodeElement).classed('selected', true);
-
-                // Mettre Ã  jour l'objet selectedDeptForToolbar
                 this.selectedDeptForToolbar = {
                     id: deptId,
                     nom: deptName || d3Node.data.data.nom,
@@ -1106,40 +903,30 @@
     UpdateEditDepartment(node) {
         if (!node) return;
         const d3Node = d3.select(node).datum();
-        // Stocker les données pour la toolbar
         this.selectedDeptForToolbar = {
             id: d3Node.data.data.id,
             nom: d3Node.data.data.nom,
             node: node
         };
-        // Afficher la toolbar
         this.updateEditToolbar(d3Node);
     }
-
     toggleEditMode() {
         if (!this.isEditMode && this.isDocumentReadOnly()) {
             this.showNotification(this.translate('documentReadOnly'), 'warning');
             return;
         }
-
         this.isEditMode = !this.isEditMode;
-
         const toggleBtn = document.getElementById('edit-mode-toggle');
         const toolbar = document.getElementById('edit-context-toolbar');
         const viewToolbar = document.getElementById('view-context-toolbar');
         const body = document.body;
-
         if (this.isEditMode) {
             body.classList.add('edit-mode-active');
             toggleBtn.classList.add('active');
             toggleBtn.querySelector('span').textContent = this.translate('exitEditMode');
-
             if (this.diagramme && this.diagramme.diagramme && this.diagramme.diagramme.setDragMode) {
                 this.diagramme.diagramme.setDragMode(true);
             }
-
-            // S'assurer que la toolbar est visible
-
             if (toolbar) {
                 toolbar.style.display = 'flex';
                 toolbar.style.opacity = '1';
@@ -1148,18 +935,14 @@
             if (viewToolbar) {
                 viewToolbar.style.display = 'none';
             }
-
-            // Mettre Ã  jour la toolbar pour afficher "No department selected"
             this.updateEditToolbar(null);
         } else {
             body.classList.remove('edit-mode-active');
             toggleBtn.classList.remove('active');
             toggleBtn.querySelector('span').textContent = this.translate('editMode');
-
             if (this.diagramme && this.diagramme.diagramme && this.diagramme.diagramme.setDragMode) {
                 this.diagramme.diagramme.setDragMode(false);
             }
-
             if (toolbar) {
                 toolbar.style.display = 'none';
                 toolbar.classList.remove('visible');
@@ -1169,35 +952,27 @@
             }
             this.selectedDeptForToolbar = null;
         }
-
-        // Refresh query details if it exists
         if (window.app && window.app.queryDetails) {
             window.app.queryDetails.refreshEditMode();
         }
     }
-
     handleDepartmentMove(sourceDeptId, targetDeptId) {
         if (!this.ensureDocumentWritable()) return;
         const sourceDept = this.xmlParser.getDepartement(sourceDeptId);
         const targetDept = this.xmlParser.getDepartement(targetDeptId);
-
         if (!sourceDept || !targetDept) {
             this.showNotification(this.translate('errorMovingDepartment'), 'error');
             return;
         }
-
         if (this.isDescendant(targetDeptId, sourceDeptId)) {
             this.showNotification(this.translate('cannotMoveIntoDescendant'), 'error');
             return;
         }
-
         if (sourceDept.parent === targetDeptId) {
             this.showNotification(this.translate('departmentAlreadyUnderParent'), 'info');
             return;
         }
-
         const success = this.xmlParser.moveDepartment(sourceDeptId, targetDeptId);
-
         if (success) {
             let movedWithoutRefresh = false;
             if (
@@ -1212,7 +987,6 @@
                     movedWithoutRefresh = false;
                 }
             }
-
             if (!movedWithoutRefresh) {
                 this.refreshDiagram();
                 setTimeout(() => {
@@ -1227,13 +1001,8 @@
             this.showNotification(this.translate('errorMovingDepartment'), 'error');
         }
     }
-
     updateAfterDragDrop(sourceDeptId, targetDeptId) {
-        // Cette méthode est appelée par le diagramme aprÃ¨s un drag & drop réussi
-
-        // Mettre Ã  jour la toolbar si le département déplacé était sélectionné
         if (this.selectedDeptForToolbar && this.selectedDeptForToolbar.id === sourceDeptId) {
-            // Trouver le nouveau noeud dans le diagramme
             setTimeout(() => {
                 if (this.diagramme && this.diagramme.diagramme) {
                     const newNode = this.diagramme.diagramme.findNodeById(
@@ -1247,17 +1016,13 @@
             }, 100);
         }
     }
-
     updateEditToolbar(d3Node) {
         if (!this.isEditMode) return;
-
         const toolbar = document.getElementById('edit-context-toolbar');
         if (!toolbar) return;
-
         if (d3Node) {
             const deptData = d3Node.data.data;
             const parent = d3Node.data.parent;
-
             this.selectedDeptForToolbar = {
                 id: deptData.id,
                 nom: deptData.nom,
@@ -1266,17 +1031,14 @@
                 d3Node: d3Node,
                 element: d3Node
             };
-
             toolbar.style.display = 'flex';
             toolbar.style.opacity = '1';
             toolbar.classList.add('visible');
-
             const isRootDept = parent === null || deptData.id === 'root';
             const deptSpan = document.getElementById('edit-toolbar-department');
             if (deptSpan) {
                 deptSpan.textContent = deptData.nom;
             }
-
             ['edit', 'add', 'duplicate', 'delete', 'copy', 'cut', 'paste'].forEach(btnType => {
                 const btn = document.getElementById(`edit-toolbar-${btnType}`);
                 if (btn) {
@@ -1301,7 +1063,6 @@
             if (deptSpan) {
                 deptSpan.textContent = this.translate('noDepartmentSelected');
             }
-
             ['edit', 'add', 'duplicate', 'delete', 'copy', 'cut', 'paste'].forEach(btnType => {
                 const btn = document.getElementById(`edit-toolbar-${btnType}`);
                 if (btn) {
@@ -1311,28 +1072,19 @@
             });
         }
     }
-
-    // Ajouter une méthode pour cacher la toolbar
     hideEditToolbar() {
-
     }
-
     cutDepartmentById(deptId) {
         if (!this.ensureDocumentWritable()) return;
         const deptData = this.xmlParser.getDepartement(deptId);
-
         if (!deptData) {
             this.showNotification(this.translate('departmentNotFound'), 'error');
             return;
         }
-
-        // Ne pas autoriser la coupe du département racine
         if (deptData.parent === null || deptId === 'root') {
             this.showNotification(this.translate('cannotCutRoot'), 'error');
             return;
         }
-
-        // Créer une copie profonde du département
         this.clipboard = {
             id: deptData.id,
             nom: deptData.nom,
@@ -1348,32 +1100,23 @@
             isCut: true,
             originalParentId: deptData.parent
         };
-
-        // Activer le bouton coller
         const pasteBtn = document.getElementById('edit-toolbar-paste');
         if (pasteBtn) {
             pasteBtn.disabled = false;
             pasteBtn.style.opacity = '1';
         }
-
         this.showNotification(this.translate('departmentCut', { name: deptData.nom }), 'success');
     }
-
     copyDepartmentById(deptId) {
         const deptData = this.xmlParser.getDepartement(deptId);
-
         if (!deptData) {
             this.showNotification(this.translate('departmentNotFound'), 'error');
             return;
         }
-
-        // Ne pas autoriser la copie du département racine
         if (deptData.parent === null || deptId === 'root') {
             this.showNotification(this.translate('cannotCopyRoot'), 'error');
             return;
         }
-
-        // Créer une copie profonde du département
         this.clipboard = {
             id: deptData.id,
             nom: deptData.nom,
@@ -1387,59 +1130,43 @@
             postes: [...(deptData.postes || [])],
             tasks: [...(deptData.tasks || [])]
         };
-
-        // Activer le bouton coller
         const pasteBtn = document.getElementById('edit-toolbar-paste');
         if (pasteBtn) {
             pasteBtn.disabled = false;
             pasteBtn.style.opacity = '1';
         }
-
         this.showNotification(this.translate('departmentCopied', { name: deptData.nom }), 'success');
     }
-
     pasteDepartment() {
         if (!this.ensureDocumentWritable()) return;
         if (!this.clipboard || !this.selectedDeptForToolbar) {
             this.showNotification(this.translate('nothingToPaste'), 'error');
             return;
         }
-
         const newParentId = this.selectedDeptForToolbar.id;
         const newParentDept = this.xmlParser.getDepartement(newParentId);
-
         if (!newParentDept) {
             this.showNotification(this.translate('parentDepartmentNotFound'), 'error');
             return;
         }
-
-        // Vérifier que le département de destination n'est pas un enfant du département coupé
         if (this.isDescendant(newParentId, this.clipboard.id)) {
             this.showNotification(this.translate('cannotMoveIntoDescendant'), 'error');
             return;
         }
-
         if (this.clipboard.isCut) {
-            // C'EST UN DèPLACEMENT
             const deptId = this.clipboard.id;
             const originalDept = this.xmlParser.getDepartement(deptId);
-
             if (!originalDept) {
                 this.showNotification(this.translate('departmentNotFound'), 'error');
                 return;
             }
-
-            // Vérifier que le nouveau parent est différent de l'ancien parent
             if (originalDept.parent === newParentId) {
                 this.showNotification(this.translate('departmentAlreadyUnderParent'), 'info');
                 this.clipboard = null;
                 this.updatePasteButton();
                 return;
             }
-
-            // Déplacer le département
             const success = this.xmlParser.moveDepartment(deptId, newParentId);
-
             if (success) {
                 let movedWithoutRefresh = false;
                 if (
@@ -1454,7 +1181,6 @@
                         movedWithoutRefresh = false;
                     }
                 }
-
                 if (!movedWithoutRefresh) {
                     this.refreshDiagram();
                 }
@@ -1462,7 +1188,6 @@
                     deptName: originalDept.nom,
                     parentName: newParentDept.nom
                 }), 'success');
-
                 this.triggerAutoSave();
                 this.clipboard = null;
                 this.updatePasteButton();
@@ -1470,32 +1195,23 @@
                 this.showNotification(this.translate('errorMovingDepartment'), 'error');
             }
         } else {
-            // C'EST UNE COPIE
             const baseId = this.clipboard.id;
             let newId = `${baseId}-copy`;
             let counter = 1;
-
-            // Vérifier l'unicité de l'ID
             while (this.xmlParser.departements.has(newId)) {
                 newId = `${baseId}-copy-${counter}`;
                 counter++;
             }
-
-            // Créer les données du nouveau département
             const newDeptData = {
                 ...this.clipboard,
                 id: newId,
                 nom: `${this.clipboard.nom} (${this.translate('duplicate')})`
             };
-
-            // Ajouter le nouveau département
             const newDept = this.xmlParser.addDepartment(newParentId, newDeptData);
-
             if (!newDept) {
                 this.showNotification(this.translate('errorPasting'), 'error');
                 return;
             }
-
             let insertedWithoutRefresh = false;
             if (
                 this.diagramme &&
@@ -1504,7 +1220,6 @@
             ) {
                 insertedWithoutRefresh = this.diagramme.diagramme.insertDepartmentNode(newParentId, newDept.id);
             }
-
             if (!insertedWithoutRefresh) {
                 this.refreshDiagram();
             }
@@ -1512,13 +1227,9 @@
             this.showNotification(this.translate('pasteSuccess', { parentName: newParentDept.nom }), 'success');
         }
     }
-
-    // Ajouter une méthode pour vérifier si un département est descendant d'un autre
     isDescendant(parentId, childId) {
         const dept = this.xmlParser.getDepartement(childId);
         if (!dept) return false;
-
-        // Remonter dans la hiérarchie
         let currentParentId = dept.parent;
         while (currentParentId !== null) {
             if (currentParentId === parentId) {
@@ -1528,11 +1239,8 @@
             if (!parentDept) break;
             currentParentId = parentDept.parent;
         }
-
         return false;
     }
-
-    // Ajouter une méthode pour mettre Ã  jour l'état du bouton coller
     updatePasteButton() {
         const pasteBtn = document.getElementById('edit-toolbar-paste');
         if (pasteBtn) {
@@ -1540,10 +1248,8 @@
             pasteBtn.style.opacity = this.clipboard ? '1' : '0.5';
         }
     }
-
     refreshDiagram() {
         const currentSelection = this.selectedDeptForToolbar ? this.selectedDeptForToolbar.id : null;
-
         if (this.diagramme && this.diagramme.diagramme && this.diagramme.diagramme.initializeChart) {
             this.diagramme.diagramme.initializeChart();
             if (this.isEditMode && this.diagramme.diagramme.setDragMode) {
@@ -1552,10 +1258,7 @@
                 }, 100);
             }
         }
-
-        // Restaurer l'état aprÃ¨s rafraêchissement
         setTimeout(() => {
-            // Restaurer la sélection
             if (currentSelection) {
                 if (this.diagramme && typeof this.diagramme.navigateToDepartmentFromSelect === 'function') {
                     setTimeout(() => {
@@ -1564,25 +1267,20 @@
                 }
             }
         }, 500);
-
         if (window.app && currentSelection) {
             window.app.queryDetails.showDepartmentDetailsId(currentSelection);
         }
     }
     toggleDetailsVisibility() {
         if (!window.app || !window.app.queryDetails) return;
-
         const detailsContainer = window.app.queryDetails.getContentContainer();
         const departmentDetails = detailsContainer?.querySelector('.department-details');
         const detailsPanel= document.getElementById('details-panel');
-        
         if (detailsPanel && detailsPanel.style.display !== 'none') {
-            // Les détails sont visibles, les masquer
             detailsPanel.style.display = 'none';
             this.updateDetailsToggleButton(true);
             window.app.queryDetails.hideDetails();
         } else {
-            // Les détails sont masqués, les afficher si un département est sélectionné
             detailsPanel.style.display = 'block';
             this.updateDetailsToggleButton(false);
             if (this.selectedDeptForToolbar && this.selectedDeptForToolbar.id) {
@@ -1590,21 +1288,17 @@
             }
         }
     }
-
     updateDetailsToggleButton(isHidden) {
         const button = document.getElementById('edit-toolbar-toggle-details');
         if (!button) return;
-
         const span = button.querySelector('span');
         const title = isHidden ? this.translate('showDetails') : this.translate('hideDetails');
-        
         button.title = title;
         if (span) {
             span.textContent = title;
         }
     }
     updateUI() {
-        // Mettre Ã  jour tous les éléments traduisibles
         const toggleBtn = document.getElementById('edit-mode-toggle');
         if (toggleBtn) {
             const span = toggleBtn.querySelector('span');
@@ -1612,27 +1306,21 @@
                 this.translate('exitEditMode') :
                 this.translate('editMode');
         }
-
         const configBtn = document.getElementById('config-btn');
         if (configBtn) {
             configBtn.title = this.translate('configuration');
         }
-
         const fileBtn = document.getElementById('file-management-btn');
         if (fileBtn) {
             fileBtn.querySelector('span').textContent = this.translate('fileManagement');
             fileBtn.title = this.translate('fileManagement');
         }
-
-        // Mettre Ã  jour la toolbar d'édition
         const toolbar = document.getElementById('edit-context-toolbar');
         if (toolbar) {
             const title = toolbar.querySelector('.edit-toolbar-title');
             if (title) {
                 title.textContent = this.translate('editMode');
             }
-
-            // Mettre Ã  jour les textes des boutons
             const buttons = [
                 { id: 'edit-toolbar-edit', key: 'editDepartment' },
                 { id: 'edit-toolbar-add', key: 'addDepartment' },
@@ -1643,7 +1331,6 @@
                 { id: 'edit-toolbar-paste', key: 'paste' },
                 { id: 'edit-toolbar-refresh', key: 'refresh' }
             ];
-
             buttons.forEach(({ id, key }) => {
                 const btn = document.getElementById(id);
                 if (btn) {
@@ -1654,8 +1341,6 @@
                     btn.title = this.translate(key);
                 }
             });
-
-            // Mettre Ã  jour le département sélectionné
             if (!this.selectedDeptForToolbar || !this.selectedDeptForToolbar.nom) {
                 const deptSpan = document.getElementById('edit-toolbar-department');
                 if (deptSpan) {
@@ -1663,16 +1348,13 @@
                 }
             }
         }
-
         const viewToolbar = document.getElementById('view-context-toolbar');
         if (viewToolbar) {
             const title = viewToolbar.querySelector('.edit-toolbar-title');
             if (title) {
                 title.textContent = this.translate('visualizationMode');
             }
-
             this.updateViewToolbarDepartment();
-
             const input = document.getElementById('view-toolbar-search');
             if (input) {
                 const placeholderKeyByMode = {
@@ -1683,13 +1365,11 @@
                 input.placeholder = this.translate(placeholderKeyByMode[this.visualSearchMode] || 'searchPlaceholderDepartments');
                 input.setAttribute('aria-label', this.translate('search'));
             }
-
             const searchLabel = viewToolbar.querySelector('.view-toolbar-search-label');
             if (searchLabel) {
                 searchLabel.innerHTML = '<span aria-hidden="true">🔍</span>';
                 searchLabel.title = this.translate('searchIn');
             }
-
             const scopeSelect = document.getElementById('view-toolbar-search-scope');
             if (scopeSelect) {
                 scopeSelect.setAttribute('aria-label', this.translate('searchIn'));
@@ -1698,7 +1378,6 @@
                 if (opts[1]) opts[1].textContent = this.translate('searchScopeDocuments');
                 if (opts[2]) opts[2].textContent = this.translate('searchScopeTasks');
             }
-
             const buttonDefs = [
                 { id: 'view-toolbar-organisation', key: 'organization' },
                 { id: 'view-toolbar-departements', key: 'departments' },
@@ -1713,7 +1392,5 @@
                 btn.title = this.translate(key);
             });
         }
-
     }
 }
-
